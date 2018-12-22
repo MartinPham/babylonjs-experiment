@@ -1016,7 +1016,7 @@ babylonjs-gltf2interface@4.0.0-alpha.16:
   resolved "https://registry.yarnpkg.com/babylonjs-gltf2interface/-/babylonjs-gltf2interface-4.0.0-alpha.16.tgz#9a77a3cd7a67298c8686cda5ed1a6db7f1b0b1d9"
   integrity sha512-cK3e6AWsZIcEjuAXVyqVu6YKah8iSBPYbZjxOf0h3haIX3TRbbnQBm6co/CjBnHSs94tCCOFA6/uPLSWEpW1AA==
 
-babylonjs-loaders@^4.0.0-alpha.16, babylonjs-loaders@preview@^3.3.0:
+babylonjs-loaders@preview@^3.3.0:
   version "4.0.0-alpha.16"
   resolved "https://registry.yarnpkg.com/babylonjs-loaders/-/babylonjs-loaders-4.0.0-alpha.16.tgz#a9b018506938c62d97463c819b009f2e5d8c4c1b"
   integrity sha512-uN4lo3UsNxC/3/4d2H8iSgLXUMZDhofEK/ElSA2PNy6euiM6USfwoxVOrEELMvuyOXVNBQwBaKDKrgoh6L4Xxw==
@@ -1024,21 +1024,21 @@ babylonjs-loaders@^4.0.0-alpha.16, babylonjs-loaders@preview@^3.3.0:
     babylonjs "4.0.0-alpha.16"
     babylonjs-gltf2interface "4.0.0-alpha.16"
 
-babylonjs-materials@^4.0.0-alpha.16, babylonjs-materials@preview@^3.3.0:
+babylonjs-materials@preview@^3.3.0:
   version "4.0.0-alpha.16"
   resolved "https://registry.yarnpkg.com/babylonjs-materials/-/babylonjs-materials-4.0.0-alpha.16.tgz#8085b7f72c5dd4c5a0aace88404c9b6029c8932f"
   integrity sha512-AFwaTaIY3TrLaRc99q8wx+haTONMDE60i+qtidlAl39WmqUDJ5fuRxSyQVEZg8ugn7ymhSa1mm8sncQwB3jXRQ==
   dependencies:
     babylonjs "4.0.0-alpha.16"
 
-babylonjs-procedural-textures@^4.0.0-alpha.16, babylonjs-procedural-textures@preview@^3.3.0:
+babylonjs-procedural-textures@preview@^3.3.0:
   version "4.0.0-alpha.16"
   resolved "https://registry.yarnpkg.com/babylonjs-procedural-textures/-/babylonjs-procedural-textures-4.0.0-alpha.16.tgz#c39533b35769b30e7e502bdc067faa41e36b99cf"
   integrity sha512-JGduJg+FWbOykWtn+7cqNPir9zU7R4twqOMsMIGNMmvFozrtEnaOW4oR43u5sYF1YktWdoxTuJLRfqlnCpJTCA==
   dependencies:
     babylonjs "4.0.0-alpha.16"
 
-babylonjs@4.0.0-alpha.16, babylonjs@^4.0.0-alpha.16, babylonjs@preview@^3.3.0:
+babylonjs@4.0.0-alpha.16, babylonjs@preview@^3.3.0:
   version "4.0.0-alpha.16"
   resolved "https://registry.yarnpkg.com/babylonjs/-/babylonjs-4.0.0-alpha.16.tgz#26b808f2b97f1aa2d5219a9da9c718657244239d"
   integrity sha512-WoenT4XiImzZbaKEzMRRa+CYUliDAJGR0/JNXJYKQeAPgdAadRN6Pg2jYH2d6LKZ8GGcU2XzAh1dmrOPE+dyOQ==
