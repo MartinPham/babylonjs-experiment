@@ -51,7 +51,6 @@ export default class App {
 
 		// This creates a basic Babylon Scene object (non-mesh)
 		this.scene = new Scene(this.engine);
-		this.vrHelper = this.scene.createDefaultVRExperience();
 		
 
 		this.assetsManager = new AssetsManager(this.scene);
@@ -63,7 +62,12 @@ export default class App {
 		this.scene.gravity = new Vector3(0, -9.81, 0);
 
 		// This creates and positions a free camera (non-mesh)
-    	this.camera = new UniversalCamera("camera", new Vector3(-20, 2, 10), this.scene);
+    	// this.camera = new UniversalCamera("camera", new Vector3(-20, 2, 10), this.scene);
+
+
+		this.vrHelper = this.scene.createDefaultVRExperience();
+		this.camera = this.vrHelper.currentVRCamera;
+		this.camera.position = new Vector3(-11, 2, -10);
 
     	this.camera.keysUp = [87];
     	this.camera.keysDown = [83];
@@ -82,7 +86,7 @@ export default class App {
 
     	// Then apply collisions and gravity to the active camera
 		this.camera.checkCollisions = true;
-		this.camera.applyGravity = true;
+		// this.camera.applyGravity = true;
 
     	// This creates a light, aiming 0,1,0 - to the sky (non-mesh)
     	this.light = new HemisphericLight("light1", new Vector3(0, 100, 0), this.scene);
@@ -91,25 +95,25 @@ export default class App {
     	this.light.intensity = 2.7;
 
 		// Our built-in 'sphere' shape. Params: name, subdivs, size, scene
-	    this.sphere = Mesh.CreateSphere("sphere1", 16, 2, this.scene);
-	    this.sphere.material = new StandardMaterial("Mat", this.scene);
-	    this.sphere.material.diffuseColor = new Color3(1, 1, 1);
-	    this.sphere.material.backFaceCulling = false;
-	    this.sphere.position = new Vector3(0, 10, -10);
-	    this.sphere.checkCollisions = true;
-	    this.sphere.applyGravity = true;
-	    this.sphere.material.wireframe = true;
+	    // this.sphere = Mesh.CreateSphere("sphere1", 16, 2, this.scene);
+	    // this.sphere.material = new StandardMaterial("Mat", this.scene);
+	    // this.sphere.material.diffuseColor = new Color3(1, 1, 1);
+	    // this.sphere.material.backFaceCulling = false;
+	    // this.sphere.position = new Vector3(0, 10, -10);
+	    // this.sphere.checkCollisions = true;
+	    // this.sphere.applyGravity = true;
+	    // this.sphere.material.wireframe = true;
 
 	    // this.camera.parent = this.sphere;
 
 	    //Simple crate
-	    this.box = Mesh.CreateBox("box1", 2, this.scene);
-	    this.box.material = new StandardMaterial("Mat", this.scene);
-	    this.box.material.diffuseColor = new Color3(1, 1, 1);
-	    this.box.material.backFaceCulling = false;
-	    this.box.position = new Vector3(10, 10, -15);
-	    this.box.checkCollisions = true;
-	    this.box.material.wireframe = true;
+	    // this.box = Mesh.CreateBox("box1", 2, this.scene);
+	    // this.box.material = new StandardMaterial("Mat", this.scene);
+	    // this.box.material.diffuseColor = new Color3(1, 1, 1);
+	    // this.box.material.backFaceCulling = false;
+	    // this.box.position = new Vector3(10, 10, -15);
+	    // this.box.checkCollisions = true;
+	    // this.box.material.wireframe = true;
 
 		// ground
 	    // this.ground = Mesh.CreatePlane("ground1", 40.0, this.scene);
@@ -136,38 +140,38 @@ export default class App {
 
 
 	    // objects
-	    const meshTask = this.assetsManager.addMeshTask("lampTask", "", "./src/objects/", "teapot.obj");
-	    meshTask.onSuccess = function (task) {
-	    	for(let i = 0; i < task.loadedMeshes.length; i++)
-	    	{
-	    		const object = task.loadedMeshes[i];
-	    		object.position = new Vector3(0, 10, -0);
-
-				object.material = new StandardMaterial("Mat", this.scene);
-			    object.material.diffuseColor = new Color3(0, 0, 0);
-			    object.material.backFaceCulling = false;
-			    object.checkCollisions = true;
-			    object.applyGravity = true;
-	    		object.material.wireframe = true;
-
-
-				object.physicsImpostor = new PhysicsImpostor(
-					object, 
-					PhysicsImpostor.BoxImpostor, 
-					{
-						mass: 1, 
-						// restitution: 0.6
-					}, 
-					this.scene
-				);
-
-				return;
-	    	}
-		}
-
-		meshTask.onError = function (task, message, exception) {
-		    console.log(message, exception);
-		}
+// 	    const meshTask = this.assetsManager.addMeshTask("lampTask", "", "./src/objects/", "teapot.obj");
+// 	    meshTask.onSuccess = function (task) {
+// 	    	for(let i = 0; i < task.loadedMeshes.length; i++)
+// 	    	{
+// 	    		const object = task.loadedMeshes[i];
+// 	    		object.position = new Vector3(0, 10, -0);
+// 
+// 				object.material = new StandardMaterial("Mat", this.scene);
+// 			    object.material.diffuseColor = new Color3(0, 0, 0);
+// 			    object.material.backFaceCulling = false;
+// 			    object.checkCollisions = true;
+// 			    object.applyGravity = true;
+// 	    		object.material.wireframe = true;
+// 
+// 
+// 				object.physicsImpostor = new PhysicsImpostor(
+// 					object, 
+// 					PhysicsImpostor.BoxImpostor, 
+// 					{
+// 						mass: 1, 
+// 						// restitution: 0.6
+// 					}, 
+// 					this.scene
+// 				);
+// 
+// 				return;
+// 	    	}
+// 		}
+// 
+// 		meshTask.onError = function (task, message, exception) {
+// 		    console.log(message, exception);
+// 		}
 
 	    const meshTask2 = this.assetsManager.addMeshTask("lampTask", "", "./src/objects/book/", "scene.gltf");
 	    meshTask2.onSuccess = function (task) {
@@ -218,25 +222,25 @@ export default class App {
 
 
 		
-		this.sphere.physicsImpostor = new PhysicsImpostor(
-			this.sphere, 
-			PhysicsImpostor.SphereImpostor, 
-			{
-				mass: 1, 
-				restitution: 0.6
-			}, 
-			this.scene
-		);
-
-		this.box.physicsImpostor = new PhysicsImpostor(
-			this.box, 
-			PhysicsImpostor.BoxImpostor, 
-			{
-				mass: 1, 
-				restitution: 0.6
-			}, 
-			this.scene
-		);
+// 		this.sphere.physicsImpostor = new PhysicsImpostor(
+// 			this.sphere, 
+// 			PhysicsImpostor.SphereImpostor, 
+// 			{
+// 				mass: 1, 
+// 				restitution: 0.6
+// 			}, 
+// 			this.scene
+// 		);
+// 
+// 		this.box.physicsImpostor = new PhysicsImpostor(
+// 			this.box, 
+// 			PhysicsImpostor.BoxImpostor, 
+// 			{
+// 				mass: 1, 
+// 				restitution: 0.6
+// 			}, 
+// 			this.scene
+// 		);
 
 
 	}
