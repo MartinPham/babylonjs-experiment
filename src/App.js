@@ -80,7 +80,7 @@ export default class App {
 		this.canvas = canvas;
 		this.engine = engine;
 
-		SceneLoader.Load('/src/objects/book/', 'scene.gltf', this.engine, (newScene) => { 
+		SceneLoader.Load('./src/objects/book/', 'scene.gltf', this.engine, (newScene) => { 
 			// console.log(newScene.meshes.length)
 			for(let i = 0; i < newScene.meshes.length; i++)
 	    	{
