@@ -42,6 +42,11 @@ export default class App {
 	ground = null;
 
 	assetsManager = null;
+	move = {
+		x: 0,
+		y: 0,
+		z: 0
+	};
 
 	constructor(canvas, engine)
 	{
@@ -66,8 +71,88 @@ export default class App {
 
 
 		this.vrHelper = this.scene.createDefaultVRExperience();
+
+
 		this.camera = this.vrHelper.currentVRCamera;
+
+
+		// small api
+		window.addEventListener('message', (event) => {
+			console.log(event)
+			if(event.data.type ==='App/Camera/StartMoving')
+			{
+				const {x, y, z} = event.data.direction;
+				this.move = {x, y, z};
+
+			}else if(event.data.type ==='App/Camera/EndMoving')
+			{
+				this.move = {
+					x: 0,
+					y: 0,
+					z: 0
+				};
+			}
+		}, false);
+
+		this.canvas.addEventListener('touchstart', (event) => {
+			const touches = event.touches;
+
+			if(touches[0])
+			{
+				const touch = touches[0];
+
+				let x = 0;
+				let y = 0;
+				let z = 0;
+
+				const speed = 0.1;
+
+				const {screenX, screenY} = touch;
+				/*
+				+-------------------+
+				|    |    U    |    |
+				| L  +---------+  R |
+				|    |    D    |    |
+				+-------------------+
+				*/
+			
+				if(screenX < window.innerWidth / 4)
+				{
+					x = -speed;
+				}else if(screenX > window.innerWidth * 3 / 4)
+				{
+					x = speed;
+				}else if(screenY < window.innerHeight / 2)
+				{
+					z = speed;
+				}else if(screenY > window.innerHeight / 2)
+				{
+					z = -speed;
+				}
+
+				window.postMessage(
+					{
+						type: 'App/Camera/StartMoving',
+						direction: {
+							x, y, z
+						}
+					},
+					location.href
+				);
+
+			}
+		}, false);
+		this.canvas.addEventListener('touchend', (event) => {
+			window.postMessage(
+				{
+					type: 'App/Camera/EndMoving'
+				},
+				location.href
+			);
+		}, false);
+
 		this.camera.position = new Vector3(-11, 2, -10);
+		this.camera._needMoveForGravity = true;
 
     	this.camera.keysUp = [87];
     	this.camera.keysDown = [83];
@@ -190,6 +275,7 @@ export default class App {
 
 				// return;
 	    	}
+
 	    	
 		}
 
@@ -251,5 +337,14 @@ export default class App {
 		this.scene.render();
 
 
+		if (
+			this.move.x !==0 || this.move.y !==0 || this.move.z !==0
+		) {
+			const {x, y, z} = this.move;
+			this.camera.cameraDirection = Vector3.TransformNormal(
+				new Vector3(x, y, z), 
+				this.camera.getWorldMatrix()
+			);
+		}
 	}
 }
