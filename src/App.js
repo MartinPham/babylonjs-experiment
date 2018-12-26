@@ -17,27 +17,29 @@ import {
 	SkyMaterial
 } from 'babylonjs';
 
+import path from 'path';
+
 import {
 	SceneLoader
 } from 'babylonjs-loaders';
 
-import './objects/rainbow/Rainbow_01.gltf';
+import rainbow from './objects/rainbow/Rainbow_01.gltf';
 import './objects/rainbow/Rainbow_01.bin';
 
-import './objects/cloud2/cloud_02.gltf';
+import cloud2 from './objects/cloud2/cloud_02.gltf';
 import './objects/cloud2/cloud_02.bin';
 
-import './objects/blimp/Blimp.gltf';
+import blimp from './objects/blimp/Blimp.gltf';
 import './objects/blimp/Blimp.bin';
 import './objects/blimp/Blimp tex.png';
 
-import './objects/falibu/model.gltf';
+import falibu from './objects/falibu/model.gltf';
 import './objects/falibu/model.bin';
 
-import './objects/ghost/ghost02.gltf';
+import ghost from './objects/ghost/ghost02.gltf';
 import './objects/ghost/ghost02.bin';
 
-import './objects/book/scene.gltf';
+import book from './objects/book/scene.gltf';
 import './objects/book/scene.bin';
 import './objects/book/textures/Texture-base_baseColor.jpg';
 import './objects/book/textures/Texture-base-gloss-jpg_baseColor.jpg';
@@ -80,7 +82,7 @@ export default class App {
 		this.canvas = canvas;
 		this.engine = engine;
 
-		SceneLoader.Load('./src/objects/book/', 'scene.gltf', this.engine, (newScene) => { 
+		SceneLoader.Load(path.dirname(book) + '/', path.basename(book), this.engine, (newScene) => { 
 			// console.log(newScene.meshes.length)
 			for(let i = 0; i < newScene.meshes.length; i++)
 	    	{
@@ -161,7 +163,7 @@ export default class App {
 
 
 	    	// load stuffs
-	    	var rainbowTask = this.assetsManager.addMeshTask("rainbow", "", "./src/objects/rainbow/", "Rainbow_01.gltf");
+	    	var rainbowTask = this.assetsManager.addMeshTask("rainbow", "", path.dirname(rainbow) + '/', path.basename(rainbow));
 	    	rainbowTask.onSuccess = function (task) {
 		    	for(let i = 0; i < task.loadedMeshes.length; i++)
 		    	{
@@ -174,7 +176,7 @@ export default class App {
 		    	}
 			}
 
-	    	var cloudTask = this.assetsManager.addMeshTask("cloud", "", "./src/objects/cloud2/", "cloud_02.gltf");
+	    	var cloudTask = this.assetsManager.addMeshTask("cloud", "", path.dirname(cloud2) + '/', path.basename(cloud2));
 	    	cloudTask.onSuccess = function (task) {
 		    	for(let i = 0; i < task.loadedMeshes.length; i++)
 		    	{
@@ -188,7 +190,7 @@ export default class App {
 			}
 
 
-	    	var ghostTask = this.assetsManager.addMeshTask("ghost", "", "./src/objects/ghost/", "ghost02.gltf");
+	    	var ghostTask = this.assetsManager.addMeshTask("ghost", "", path.dirname(ghost) + '/', path.basename(ghost));
 	    	ghostTask.onSuccess = function (task) {
 		    	for(let i = 0; i < task.loadedMeshes.length; i++)
 		    	{
@@ -201,7 +203,7 @@ export default class App {
 		    	}
 			}
 
-	    	var falibuTask = this.assetsManager.addMeshTask("falibu", "", "./src/objects/falibu/", "model.gltf");
+	    	var falibuTask = this.assetsManager.addMeshTask("falibu", "", path.dirname(falibu) + '/', path.basename(falibu));
 	    	falibuTask.onSuccess = (task) => {
 		    	for(let i = 0; i < task.loadedMeshes.length; i++)
 		    	{
@@ -217,10 +219,10 @@ export default class App {
 
 		    this.blimp = Mesh.CreateBox("box1", 0.0001, this.scene);
 		    this.blimp.isVisible = false;
-		    this.blimp.position = new Vector3(70, 70, -120);
+		    this.blimp.position = new Vector3(70, 90, -120);
 		    this.blimp.rotation = new Vector3(0, Math.PI/4, 0);
 	    
-	    	var blimpTask = this.assetsManager.addMeshTask("blimp", "", "./src/objects/blimp/", "Blimp.gltf");
+	    	var blimpTask = this.assetsManager.addMeshTask("blimp", "", path.dirname(blimp) + '/', path.basename(blimp));
 	    	blimpTask.onSuccess = (task) => {
 
 		    	for(let i = 0; i < task.loadedMeshes.length; i++)
