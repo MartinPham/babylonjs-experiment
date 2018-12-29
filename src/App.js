@@ -481,3 +481,35 @@ export default class App {
 
 	}
 }
+
+/*
+function transform(scene, object, from, to, frameRate){
+    var group = [];
+    for(var attributeGroup in from)
+    {
+        for(var attribute in from[attributeGroup])
+        {
+            // console.log(
+            //     attributeGroup + "_" + attribute,
+            //     from[attributeGroup][attribute],
+            //     to[attributeGroup][attribute]
+            // );
+            var animation = new BABYLON.Animation(attributeGroup + "_" + attribute, attributeGroup + "." + attribute, frameRate, BABYLON.Animation.ANIMATIONTYPE_FLOAT, BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
+            animation.setKeys([
+                {
+                    frame: 0,
+                    value: from[attributeGroup][attribute]
+                },
+                {
+                    frame: frameRate,
+                    value: to[attributeGroup][attribute]
+                }
+            ]);
+            group.push(animation);
+        
+        }
+    }
+
+    scene.beginDirectAnimation(object, group, 0, 2 * frameRate, false);
+}
+*/
